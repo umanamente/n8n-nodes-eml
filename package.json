@@ -1,0 +1,63 @@
+{
+  "name": "n8n-nodes-eml",
+  "version": "0.1.0",
+  "description": "",
+  "keywords": [
+    "n8n-community-node-package"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "author": {
+    "name": "Vasily Maslyukov",
+    "email": "auro.coding@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/umanamente/n8n-nodes-eml.git"
+  },
+  "engines": {
+    "node": ">=18.10",
+    "pnpm": ">=9.1"
+  },
+  "packageManager": "pnpm@9.1.4",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "build": "tsc && gulp build:icons",
+    "dev": "tsc --watch",
+    "run-dev": "pnpm build && cross-env N8N_LOG_LEVEL=debug n8n start",
+    "run-dev-tunnel": "pnpm build && cross-env N8N_LOG_LEVEL=debug n8n start --tunnel",
+    "format": "prettier nodes credentials --write",
+    "lint": "eslint nodes credentials package.json",
+    "lintfix": "eslint nodes credentials package.json --fix",
+    "prepublishOnly": "pnpm build && pnpm lint -c .eslintrc.prepublish.js nodes credentials package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [],
+    "nodes": [
+      "dist/nodes/Eml/Eml.node.js"
+    ]
+  },
+  "devDependencies": {
+    "@types/mailparser": "^3.4.5",
+    "@typescript-eslint/parser": "^7.15.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.56.0",
+    "eslint-plugin-n8n-nodes-base": "^1.16.1",
+    "n8n-workflow": "*",
+    "gulp": "^4.0.2",
+    "prettier": "^3.3.2",
+    "typescript": "^5.5.3"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  },
+  "dependencies": {
+    "mailparser": "^3.7.2",
+    "nodemailer": "^6.10.0"
+  }
+}
