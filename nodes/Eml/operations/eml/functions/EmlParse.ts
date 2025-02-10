@@ -8,6 +8,12 @@ type Address = {
   name: string;
 };
 
+type AttachmentInfo = {
+  filename: string;
+  contentType: string;
+  size: number;
+};
+
 // Parsed EML JSON returned by the operation
 type ParsedEmlJson = {
   envelope: {
@@ -23,6 +29,7 @@ type ParsedEmlJson = {
   };
   body_text: string;
   body_html: string;
+  attachments?: AttachmentInfo[];
 };
 
 // convert AddressObject (from mailparser) to Address[]
@@ -147,8 +154,19 @@ export const parseEmlOperation: IResourceOperationDef = {
     parsedEmlJson.body_text = parsed.text || '';
     parsedEmlJson.body_html = parsed.html || '';
 
-    // attachments
+    // json output will include attachment info
+    parsedEmlJson.attachments = parsed.attachments.map((attachment) => {
+      return {
+        filename: attachment.filename || '',
+        contentType: attachment.contentType || '',
+        size: attachment.size || 0,
+      };
+    });
+
+    // include binary data for attachments if requested
     if (includeAttachments) {
+
+      // binary output will include binary data for each attachment
       for (let attachment of parsed.attachments) {
         if (attachment.filename) {
           const binaryData = await context.helpers.prepareBinaryData(attachment.content, attachment.filename, attachment.contentType);
