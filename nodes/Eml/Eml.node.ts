@@ -12,6 +12,7 @@ export class Eml implements INodeType {
   description: INodeTypeDescription = {
     displayName: 'EML',
     name: 'eml',
+    // eslint-disable-next-line n8n-nodes-base/node-class-description-icon-not-svg
     icon: 'file:node-eml-icon.png',
     group: ['transform'],
     version: 1,
