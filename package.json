@@ -1,7 +1,7 @@
 {
   "name": "n8n-nodes-eml",
   "version": "0.1.0",
-  "description": "",
+  "description": "This is an n8n community node. It lets you parse and generate EML files (RFC 822) in your workflows.",
   "keywords": [
     "n8n-community-node-package"
   ],
@@ -27,17 +27,16 @@
     "dev": "tsc --watch",
     "run-dev": "pnpm build && cross-env N8N_LOG_LEVEL=debug n8n start",
     "run-dev-tunnel": "pnpm build && cross-env N8N_LOG_LEVEL=debug n8n start --tunnel",
-    "format": "prettier nodes credentials --write",
-    "lint": "eslint nodes credentials package.json",
-    "lintfix": "eslint nodes credentials package.json --fix",
-    "prepublishOnly": "pnpm build && pnpm lint -c .eslintrc.prepublish.js nodes credentials package.json"
+    "format": "prettier nodes --write",
+    "lint": "eslint nodes package.json",
+    "lintfix": "eslint nodes package.json --fix",
+    "prepublishOnly": "pnpm build && pnpm lint -c .eslintrc.prepublish.js nodes package.json"
   },
   "files": [
     "dist"
   ],
   "n8n": {
     "n8nNodesApiVersion": 1,
-    "credentials": [],
     "nodes": [
       "dist/nodes/Eml/Eml.node.js"
     ]
