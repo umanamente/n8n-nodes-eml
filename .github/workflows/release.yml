@@ -23,12 +23,14 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "lts/*"
+      - name: Install pnpm
+        run: npm install -g pnpm
       - name: Install dependencies
-        run: npm clean-install
+        run: pnpm install --frozen-lockfile
       - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
-        run: npm audit signatures
+        run: pnpm audit signatures
       - name: Build and test
-        run: npm run prepublishOnly
+        run: pnpm run prepublishOnly
   release:
     name: Release
     runs-on: ubuntu-latest
@@ -48,10 +50,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "lts/*"
+      - name: Install pnpm
+        run: npm install -g pnpm
       - name: Install dependencies
-        run: npm clean-install
+        run: pnpm install --frozen-lockfile
       - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
-        run: npm audit signatures
+        run: pnpm audit signatures
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -77,15 +81,17 @@ jobs:
         with:
           node-version: "lts/*"
           registry-url: https://registry.npmjs.org/
+      - name: Install pnpm
+        run: npm install -g pnpm
       - name: Install dependencies
-        run: npm clean-install
+        run: pnpm install --frozen-lockfile
       - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
-        run: npm audit signatures
+        run: pnpm audit signatures
       - name: Set version env
         run: echo "NEXT_VERSION=$(git describe --tags --always --abbrev=7 | sed 's/$/-beta/')" >> $GITHUB_ENV
       - name: Set version
-        run: npm version $NEXT_VERSION --no-git-tag-version
+        run: pnpm version $NEXT_VERSION --no-git-tag-version
       - name: Publish to npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish --tag beta
+        run: pnpm publish --tag beta
