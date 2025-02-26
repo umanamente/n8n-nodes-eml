@@ -43,12 +43,13 @@
   },
   "devDependencies": {
     "@types/mailparser": "^3.4.5",
+    "@types/nodemailer": "^6.4.17",
     "@typescript-eslint/parser": "^7.15.0",
     "cross-env": "^7.0.3",
     "eslint": "^8.56.0",
     "eslint-plugin-n8n-nodes-base": "^1.16.1",
-    "n8n-workflow": "*",
     "gulp": "^4.0.2",
+    "n8n-workflow": "*",
     "prettier": "^3.3.2",
     "typescript": "^5.5.3"
   },
