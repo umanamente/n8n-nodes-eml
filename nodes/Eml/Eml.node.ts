@@ -62,7 +62,7 @@ export class Eml implements INodeType {
 
         for (let itemIndex = 0; itemIndex < items.length; itemIndex++) {
           try {
-            const itemResults = await handler.execute(this, itemIndex);
+            const itemResults = await handler.execute(this, itemIndex, items[itemIndex]);
             if (itemResults) {
               resultItems.push(...itemResults);
             }    

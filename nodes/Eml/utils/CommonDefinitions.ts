@@ -3,7 +3,7 @@ import { IExecuteFunctions, INodeExecutionData, INodeProperties, INodePropertyOp
 export interface IResourceOperationDef {
   operation: INodePropertyOptions;
   parameters: INodeProperties[];
-  execute: (context: IExecuteFunctions, itemIndex: number) => Promise<INodeExecutionData[] | NodeExecutionWithMetadata[] | null>;
+  execute: (context: IExecuteFunctions, itemIndex: number, item: INodeExecutionData) => Promise<INodeExecutionData[] | NodeExecutionWithMetadata[] | null>;
 };
 
 export interface IResourceDef {

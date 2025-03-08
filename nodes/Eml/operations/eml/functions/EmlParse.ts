@@ -98,7 +98,7 @@ export const parseEmlOperation: IResourceOperationDef = {
       description: 'Whether to include attachments in the output (as binary data)',
     },
   ],
-  async execute(context: IExecuteFunctions, itemIndex: number): Promise<INodeExecutionData[] | null> {
+  async execute(context: IExecuteFunctions, itemIndex: number, item: INodeExecutionData): Promise<INodeExecutionData[] | null> {
 
     var returnItem: INodeExecutionData = {
       json: {},
