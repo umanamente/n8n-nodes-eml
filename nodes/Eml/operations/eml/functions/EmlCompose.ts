@@ -49,12 +49,12 @@ export const composeEmlOperation: IResourceOperationDef = {
       },
       description: 'The text content of the email',
     },
-    // options
+    // optional parameters
     {
-      displayName: 'Options',
+      displayName: 'Optional Parameters',
       name: 'options',
       type: 'collection',
-      placeholder: 'Add Option',
+      placeholder: 'Add Optional Parameter',
       default: {},
       options: [
         {
@@ -83,7 +83,39 @@ export const composeEmlOperation: IResourceOperationDef = {
           description: 'A comma-separated list of binary property names to attach to the email',
         }
       ],
-
+    },
+    // headers
+    {
+      displayName: 'Headers',
+      name: 'headers',
+      type: 'fixedCollection',
+      typeOptions: {
+        multipleValues: true,
+      },
+      placeholder: 'Add Header',
+      default: {},
+      options: [
+        {
+          name: 'header',
+          displayName: 'Header',
+          values: [
+            {
+              displayName: 'Name',
+              name: 'name',
+              type: 'string',
+              default: '',
+              description: 'The name of the header',
+            },
+            {
+              displayName: 'Value',
+              name: 'value',
+              type: 'string',
+              default: '',
+              description: 'The value of the header',
+            },
+          ],
+        },
+      ],
     }
   ],
   async execute(context: IExecuteFunctions, itemIndex: number, item: INodeExecutionData): Promise<INodeExecutionData[] | null> {
@@ -115,6 +147,19 @@ export const composeEmlOperation: IResourceOperationDef = {
     }
     if ("html" in optionalParameters) { 
       mail_params.html = optionalParameters.html as string;
+    }
+
+    //  headers    
+    const headers = context.getNodeParameter('headers', itemIndex) as IDataObject;
+    mail_params.headers = {}; 
+    if (headers && headers["header"]) {
+      const headers_list = headers["header"] as IDataObject[];
+      for (const header of headers_list) {        
+        const name = header.name as string;
+        const value = header.value as string;
+        context.logger.info('Debug: header: ' + name + ' = ' + value);
+        mail_params.headers[name] = value;
+      }
     }
 
     // attachments

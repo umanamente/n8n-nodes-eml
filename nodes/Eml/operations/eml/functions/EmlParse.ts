@@ -144,7 +144,6 @@ export const parseEmlOperation: IResourceOperationDef = {
     // if filtering headers
     if (!includeAllHeaders) {
       const headersToInclude = context.getNodeParameter('headersToInclude', itemIndex) as string;
-      context.logger.info('Debug: headersToInclude: ' + headersToInclude);
       const headersToIncludeArray = headersToInclude.split(',').map((header) => header.trim().toLowerCase());
       // only keep headers that are in the headersToIncludeArray
       parsedEmlJson.headers = Object.fromEntries(Object.entries(parsedEmlJson.headers).filter(([key, value]) => headersToIncludeArray.includes(key.toLowerCase())));
