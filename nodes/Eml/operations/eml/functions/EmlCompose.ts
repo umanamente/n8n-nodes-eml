@@ -81,7 +81,14 @@ export const composeEmlOperation: IResourceOperationDef = {
           type: 'string',
           default: '',
           description: 'A comma-separated list of binary property names to attach to the email',
-        }
+        },
+        {
+          displayName: 'Inline Attachments',
+          name: 'inlineAttachments',
+          type: 'string',
+          default: '',
+          description: 'A comma-separated list of binary property names to attach to the email inline. The filename will be used as the content ID (cid) for reference.',
+        },
       ],
     },
     // headers
@@ -190,6 +197,43 @@ export const composeEmlOperation: IResourceOperationDef = {
               encoding: 'base64',
             };
             
+
+            mail_params.attachments = mail_params.attachments || [];
+            mail_params.attachments.push(newAttachment);
+          }
+        }
+      }
+    }
+
+    // inline attachments
+    if ("inlineAttachments" in optionalParameters) {
+      const inlineAttachments = (optionalParameters.inlineAttachments as string).trim().split(',');
+      
+      // check if attachments field is empty
+      if (inlineAttachments.length === 1 && inlineAttachments[0] === '') {
+        // do nothing as there are no attachments
+      }
+      // check if input does not contain binary data
+      else if (item.binary === undefined) {
+        throw new NodeApiError(context.getNode(), {}, {
+          message: `No binary data found in the input while attachments are requested`,
+        });
+      } else {
+        for (let i = 0; i < inlineAttachments.length; i++) {
+          const propertyName = inlineAttachments[i].trim();
+          if (propertyName in item.binary) {
+            const binaryData: IBinaryData = item.binary[propertyName];
+            
+            const fileName = binaryData.fileName || propertyName;
+
+            let newAttachment: Mail.Attachment = {
+              cid: fileName,
+              filename: fileName,
+              content: binaryData.data,
+              contentType: binaryData.mimeType,
+              contentDisposition: 'inline',
+              encoding: 'base64',
+            };
 
             mail_params.attachments = mail_params.attachments || [];
             mail_params.attachments.push(newAttachment);
