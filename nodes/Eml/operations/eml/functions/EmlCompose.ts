@@ -187,7 +187,7 @@ export const composeEmlOperation: IResourceOperationDef = {
           const propertyName = attachments[i].trim();
           if (propertyName in item.binary) {
             const binaryMeta: IBinaryData = item.binary[propertyName];
-            const binaryData = await context.helpers.getBinaryDataBuffer(0, propertyName);
+            const binaryData = await context.helpers.getBinaryDataBuffer(itemIndex, propertyName);
             
             const fileName = binaryMeta.fileName || propertyName;
 
@@ -224,7 +224,7 @@ export const composeEmlOperation: IResourceOperationDef = {
           const propertyName = inlineAttachments[i].trim();
           if (propertyName in item.binary) {
             const binaryMeta: IBinaryData = item.binary[propertyName];
-            const binaryData = await context.helpers.getBinaryDataBuffer(0, propertyName);
+            const binaryData = await context.helpers.getBinaryDataBuffer(itemIndex, propertyName);
             
             const fileName = binaryMeta.fileName || propertyName;
 
