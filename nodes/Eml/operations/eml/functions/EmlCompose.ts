@@ -186,14 +186,15 @@ export const composeEmlOperation: IResourceOperationDef = {
         for (let i = 0; i < attachments.length; i++) {
           const propertyName = attachments[i].trim();
           if (propertyName in item.binary) {
-            const binaryData: IBinaryData = item.binary[propertyName];
+            const binaryMeta: IBinaryData = item.binary[propertyName];
+            const binaryData = await context.helpers.getBinaryDataBuffer(itemIndex, propertyName);
             
-            const fileName = binaryData.fileName || propertyName;
+            const fileName = binaryMeta.fileName || propertyName;
 
             let newAttachment: Mail.Attachment = {
               filename: fileName,
-              content: binaryData.data,
-              contentType: binaryData.mimeType,
+              content: binaryData,
+              contentType: binaryMeta.mimeType,
               encoding: 'base64',
             };
             
@@ -222,15 +223,16 @@ export const composeEmlOperation: IResourceOperationDef = {
         for (let i = 0; i < inlineAttachments.length; i++) {
           const propertyName = inlineAttachments[i].trim();
           if (propertyName in item.binary) {
-            const binaryData: IBinaryData = item.binary[propertyName];
+            const binaryMeta: IBinaryData = item.binary[propertyName];
+            const binaryData = await context.helpers.getBinaryDataBuffer(itemIndex, propertyName);
             
-            const fileName = binaryData.fileName || propertyName;
+            const fileName = binaryMeta.fileName || propertyName;
 
             let newAttachment: Mail.Attachment = {
               cid: fileName,
               filename: fileName,
-              content: binaryData.data,
-              contentType: binaryData.mimeType,
+              content: binaryData,
+              contentType: binaryMeta.mimeType,
               contentDisposition: 'inline',
               encoding: 'base64',
             };
