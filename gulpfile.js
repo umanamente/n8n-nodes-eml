@@ -1,15 +1,24 @@
+const fs = require('fs');
 const path = require('path');
-const { task, src, dest } = require('gulp');
+const { task, src, dest, series } = require('gulp');
 
-task('build:icons', copyIcons);
+task('build:icons', series(copyNodeIcons, copyCredentialIcons));
 
-function copyIcons() {
+function copyNodeIcons() {
 	const nodeSource = path.resolve('nodes', '**', '*.{png,svg}');
 	const nodeDestination = path.resolve('dist', 'nodes');
 
-	src(nodeSource).pipe(dest(nodeDestination));
+	return src(nodeSource, { allowEmpty: true }).pipe(dest(nodeDestination));
+}
 
-	const credSource = path.resolve('credentials', '**', '*.{png,svg}');
+function copyCredentialIcons() {
+	const credentialsDir = path.resolve('credentials');
+
+	if (!fs.existsSync(credentialsDir)) {
+		return Promise.resolve();
+	}
+
+	const credSource = path.resolve(credentialsDir, '**', '*.{png,svg}');
 	const credDestination = path.resolve('dist', 'credentials');
 
 	return src(credSource).pipe(dest(credDestination));
