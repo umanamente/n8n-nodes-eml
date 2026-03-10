@@ -1,12 +1,15 @@
 import type {
   IExecuteFunctions,
   INodeExecutionData,
+  NodeConnectionType,
   INodeType,
   INodeTypeDescription,
 } from 'n8n-workflow';
-import { NodeConnectionType, NodeOperationError } from 'n8n-workflow';
+import { NodeOperationError } from 'n8n-workflow';
 import { allResourceDefinitions } from './operations/ResourcesList';
 import { getAllResourceNodeParameters } from './utils/CommonDefinitions';
+
+const MAIN_CONNECTION = 'main' as NodeConnectionType;
 
 export class Eml implements INodeType {
   description: INodeTypeDescription = {
@@ -22,9 +25,9 @@ export class Eml implements INodeType {
       name: 'EML',
     },
     // eslint-disable-next-line n8n-nodes-base/node-class-description-inputs-wrong-regular-node
-    inputs: [NodeConnectionType.Main],
+    inputs: [MAIN_CONNECTION],
     // eslint-disable-next-line n8n-nodes-base/node-class-description-outputs-wrong
-    outputs: [NodeConnectionType.Main],
+    outputs: [MAIN_CONNECTION],
     properties: [
 
       // eslint-disable-next-line n8n-nodes-base/node-param-default-missing
