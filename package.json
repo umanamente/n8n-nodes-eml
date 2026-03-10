@@ -58,6 +58,6 @@
   },
   "dependencies": {
     "mailparser": "^3.7.2",
-    "nodemailer": "^6.10.0"
+    "nodemailer": "^8.0.2"
   }
 }

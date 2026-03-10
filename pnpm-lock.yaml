@@ -12,8 +12,8 @@ importers:
         specifier: ^3.7.2
         version: 3.7.2
       nodemailer:
-        specifier: ^6.10.0
-        version: 6.10.0
+        specifier: ^8.0.2
+        version: 8.0.2
     devDependencies:
       '@types/mailparser':
         specifier: ^3.4.5
@@ -1407,12 +1407,12 @@ packages:
   no-case@3.0.4:
     resolution: {integrity: sha512-fgAN3jGAh+RoxUGZHTSOLJIqUc2wmoBwGR4tbpNAKmmovFoWq0OdRkb0VkldReO2a2iBT/OEulG9XSUc10r3zg==}
 
-  nodemailer@6.10.0:
-    resolution: {integrity: sha512-SQ3wZCExjeSatLE/HBaXS5vqUOQk6GtBdIIKxiFdmm01mOQZX/POJkO3SUX1wDiYcwUOJwT23scFSC9fY2H8IA==}
-    engines: {node: '>=6.0.0'}
-
   nodemailer@6.9.16:
     resolution: {integrity: sha512-psAuZdTIRN08HKVd/E8ObdV6NO7NTBY3KsC30F7M4H1OnmLCUNaS56FpYxyb26zWLSyYF9Ozch9KYHhHegsiOQ==}
+    engines: {node: '>=6.0.0'}
+
+  nodemailer@8.0.2:
+    resolution: {integrity: sha512-zbj002pZAIkWQFxyAaqoxvn+zoIwRnS40hgjqTXudKOOJkiFFgBeNqjgD3/YCR12sZnrghWYBY+yP1ZucdDRpw==}
     engines: {node: '>=6.0.0'}
 
   normalize-package-data@2.5.0:
@@ -3753,9 +3753,9 @@ snapshots:
       lower-case: 2.0.2
       tslib: 2.6.3
 
-  nodemailer@6.10.0: {}
-
   nodemailer@6.9.16: {}
+
+  nodemailer@8.0.2: {}
 
   normalize-package-data@2.5.0:
     dependencies:
