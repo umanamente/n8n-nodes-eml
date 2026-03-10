@@ -1,18 +1,4 @@
-<div align="center">
-
-### ⚠️🚨 WARNING: THIS NODE IS IN DEVELOPMENT 🚨⚠️
-
-<span style="color: red; font-size: 20px; font-weight: bold;">
-This project is under active development. Breaking changes may occur.  
-	
-**Please be prepared to update your workflows when upgrading this node.**  
-
-</span>
-
-</div>
-
-
-# n8n-nodes-eml
+# <img src="nodes/Eml/node-eml-icon.png"  height="40"> n8n-nodes-eml
 
 This is an n8n community node. It lets you parse and generate EML files (RFC 822) in your workflows.
 
